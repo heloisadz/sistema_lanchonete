@@ -1,18 +1,18 @@
 #ifndef PEDIDO_H
 #define PEDIDO_H
 
-typedef struct {
+typedef struct{
     int codigo;
     char nome[50];
     float preco;
 } Item;
 
-typedef struct {
+typedef struct{
     Item item;
     int quantidade;
 } ItemPedido;
 
-typedef struct {
+typedef struct{
     int numero;
     char cliente[50];
 
@@ -22,7 +22,7 @@ typedef struct {
     float total;
 } Pedido;
 
-typedef struct No {
+typedef struct No{
     Pedido pedido;
     struct No *proximo;
 } No;

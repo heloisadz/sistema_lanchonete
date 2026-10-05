@@ -2,19 +2,19 @@
 #include <stdlib.h>
 #include "fila.h"
 
-void iniciar_fila(Fila *fila) {
+void iniciar_fila(Fila *fila){
     fila->inicio = NULL;
     fila->fim = NULL;
 }
 
-int fila_vazia(Fila *fila) {
+int fila_vazia(Fila *fila){
     return fila->inicio == NULL;
 }
 
-void adicionar_fila(Fila *fila, Pedido pedido) {
+void adicionar_fila(Fila *fila, Pedido pedido){
     No *novo = malloc(sizeof(No));
 
-    if (novo == NULL) {
+    if (novo == NULL){
         printf("Erro: nao foi possivel alocar memoria.\n");
         return;
     }
@@ -22,18 +22,18 @@ void adicionar_fila(Fila *fila, Pedido pedido) {
     novo->pedido = pedido;
     novo->proximo = NULL;
 
-    if (fila_vazia(fila)) {
+    if (fila_vazia(fila)){
         fila->inicio = novo;
         fila->fim = novo;
-    } else {
+    } else{
         fila->fim->proximo = novo;
         fila->fim = novo;
     }
 }
 
-void consultar_proximo(Fila *fila) {
+void consultar_proximo(Fila *fila){
 
-    if (fila_vazia(fila)) {
+    if (fila_vazia(fila)){
         printf("A fila esta vazia.\n");
         return;
     }
@@ -45,7 +45,7 @@ void consultar_proximo(Fila *fila) {
 
     printf("Itens:\n");
 
-    for (int i = 0; i < fila->inicio->pedido.quantidade_itens; i++) {
+    for (int i = 0; i < fila->inicio->pedido.quantidade_itens; i++){
 
         printf("-%s (%dx): R$ %.2f\n",
                fila->inicio->pedido.itens[i].item.nome,
@@ -59,8 +59,8 @@ void consultar_proximo(Fila *fila) {
     printf("------------------------------------\n");
 }
 
-int remover_proximo_fila(Fila *fila, Pedido *pedido) {
-    if (fila_vazia(fila)) {
+int remover_proximo_fila(Fila *fila, Pedido *pedido){
+    if (fila_vazia(fila)){
         printf("Fila vazia!\n");
         return 0;
     }
@@ -71,7 +71,7 @@ int remover_proximo_fila(Fila *fila, Pedido *pedido) {
 
     fila->inicio = removido->proximo;
 
-    if (fila->inicio == NULL) {
+    if (fila->inicio == NULL){
         fila->fim = NULL;
     }
 
@@ -81,10 +81,10 @@ int remover_proximo_fila(Fila *fila, Pedido *pedido) {
     return 1;
 }
 
-void limpar_fila(Fila *fila) {
+void limpar_fila(Fila *fila){
     No *atual;
 
-    while (fila->inicio != NULL) {
+    while (fila->inicio != NULL){
         atual = fila->inicio;
         fila->inicio = fila->inicio->proximo;
         free(atual);
@@ -93,9 +93,9 @@ void limpar_fila(Fila *fila) {
     fila->fim = NULL;
 }
 
-void mostrar_fila(Fila *fila) {
+void mostrar_fila(Fila *fila){
 
-    if (fila_vazia(fila)) {
+    if (fila_vazia(fila)){
         printf("A fila esta vazia.\n");
         return;
     }
@@ -104,14 +104,14 @@ void mostrar_fila(Fila *fila) {
 
     printf("\n========== FILA DE ESPERA ==========\n");
 
-    while (atual != NULL) {
+    while (atual != NULL){
 
         printf("\nPedido: %d\n", atual->pedido.numero);
         printf("Cliente: %s\n", atual->pedido.cliente);
 
         printf("Itens:\n");
 
-        for (int i = 0; i < atual->pedido.quantidade_itens; i++) {
+        for (int i = 0; i < atual->pedido.quantidade_itens; i++){
 
             printf("-%s (%dx): R$ %.2f\n",
                    atual->pedido.itens[i].item.nome,

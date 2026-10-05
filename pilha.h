@@ -3,7 +3,7 @@
 
 #include "pedido.h"
 
-typedef struct {
+typedef struct{
     No *topo;
 } Pilha;
 
