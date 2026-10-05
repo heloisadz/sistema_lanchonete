@@ -32,7 +32,9 @@ void consultar_topo(Pilha *pilha) {
 
     Pedido *pedido = &pilha->topo->pedido;
 
-    printf("\n========== ULTIMO PEDIDO PREPARADO ==========\n");
+    printf("\n");
+    printf("========== ULTIMO PEDIDO PREPARADO ==========");
+    printf("\n");
 
     printf("Pedido: %d\n", pedido->numero);
     printf("Cliente: %s\n", pedido->cliente);
@@ -87,7 +89,9 @@ void mostrar_pilha(Pilha *pilha) {
 
     Pedido pedido;
 
-    printf("\n========== HISTORICO DE PEDIDOS ==========\n");
+    printf("\n");
+    printf("========== HISTORICO DE PEDIDOS ==========");
+    printf("\n");
 
     while (!pilha_vazia(pilha)) {
 
@@ -140,7 +144,9 @@ void consultar_por_id(Pilha *pilha, int numero) {
 
         if (pedido.numero == numero) {
 
-            printf("\n========== PEDIDO ENCONTRADO ==========\n");
+            printf("\n");
+            printf("========== PEDIDO ENCONTRADO ==========");
+            printf("\n");
 
             printf("Pedido: %d\n", pedido.numero);
             printf("Cliente: %s\n", pedido.cliente);

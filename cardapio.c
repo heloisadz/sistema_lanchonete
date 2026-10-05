@@ -3,7 +3,9 @@
 
 void mostrar_cardapio(Item cardapio[], int total_itens_cardapio) {
 
-    printf("\n===== CARDAPIO =====\n");
+    printf("\n");
+    printf("===== CARDAPIO =====");
+    printf("\n");
 
     for (int i = 0; i < total_itens_cardapio; i++) {
         printf("%d - %s - R$ %.2f\n",

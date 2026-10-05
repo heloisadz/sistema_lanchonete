@@ -16,7 +16,9 @@ void criar_pedido(Pedido *pedido, Item *cardapio, int total_itens_cardapio, int 
     pedido->quantidade_itens = 0;
     pedido->total = 0;
 
-    printf("\n========== NOVO PEDIDO ==========\n");
+    printf("\n");
+    printf("========== NOVO PEDIDO ==========");
+    printf("\n");
 
     printf("Nome do cliente: ");
     scanf(" %49[^\n]", pedido->cliente);
@@ -101,7 +103,10 @@ int main() {
     iniciar_pilha(&pilha);
 
     do {
-        printf("\n========== LANCHONETE ==========\n");
+
+        printf("\n");
+        printf("========== LANCHONETE ==========");
+        printf("\n");
         printf("1 - Adicionar pedido a fila\n");
         printf("2 - Consultar proximo pedido\n");
         printf("3 - Preparar proximo pedido\n");
