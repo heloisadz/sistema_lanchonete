@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "fila.h"
 #include "pilha.h"
 #include "cardapio.h"
@@ -31,7 +30,7 @@ void criar_pedido(Pedido *pedido, Item *cardapio, int total_itens_cardapio, int 
         printf("\n");
         mostrar_cardapio(cardapio, total_itens_cardapio);
 
-        printf("\nDigite o codigo do item  (para  digite 0): ");
+        printf("\nDigite o codigo do item (0 para finalizar): ");
         scanf("%d", &codigo);
 
         if (codigo == 0) {
@@ -59,6 +58,7 @@ void criar_pedido(Pedido *pedido, Item *cardapio, int total_itens_cardapio, int 
         }
 
         pedido->itens[pedido->quantidade_itens].item = cardapio[encontrado];
+
         pedido->itens[pedido->quantidade_itens].quantidade = quantidade;
 
         pedido->total += cardapio[encontrado].preco * quantidade;
@@ -77,30 +77,22 @@ void criar_pedido(Pedido *pedido, Item *cardapio, int total_itens_cardapio, int 
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int main() {
 
     Fila fila;
     Pilha pilha;
 
-    Item *cardapio = NULL;
-    int total_itens_cardapio = 0;
-    int proximoCodigoItem = 1;
+    Item cardapio[] = {
+        {1, "X-Burguer", 12.00},
+        {2, "X-Salada", 14.50},
+        {3, "X-Bacon", 16.00},
+        {4, "Batata Frita", 10.00},
+        {5, "Refrigerante", 6.00},
+        {6, "Suco", 7.00}
+    };
+
+    int total_itens_cardapio = sizeof(cardapio) / sizeof(cardapio[0]);
+
     int proximoNumeroPedido = 1;
 
     int opcao;
@@ -109,7 +101,6 @@ int main() {
     iniciar_pilha(&pilha);
 
     do {
-
         printf("\n========== LANCHONETE ==========\n");
         printf("1 - Adicionar pedido a fila\n");
         printf("2 - Consultar proximo pedido\n");
@@ -119,9 +110,7 @@ int main() {
         printf("6 - Remover ultimo do historico\n");
         printf("7 - Mostrar fila de espera\n");
         printf("8 - Mostrar historico\n");
-        printf("9 - Adicionar item ao cardapio\n");
-        printf("10 - Mostrar cardapio\n");
-        printf("11 - Remover item do cardapio\n");
+        printf("9 - Mostrar cardapio\n");
         printf("0 - Sair\n");
 
         printf("Escolha uma opcao: ");
@@ -132,12 +121,18 @@ int main() {
             case 1: {
                 Pedido pedido;
 
-                criar_pedido(&pedido, cardapio, total_itens_cardapio, &proximoNumeroPedido);
+                criar_pedido(
+                    &pedido,
+                    cardapio,
+                    total_itens_cardapio,
+                    &proximoNumeroPedido
+                );
 
                 if (pedido.quantidade_itens > 0) {
                     adicionar_fila(&fila, pedido);
                     printf("Pedido adicionado a fila de espera!\n");
                 }
+
                 break;
             }
 
@@ -149,6 +144,7 @@ int main() {
                 Pedido pedido;
 
                 if (remover_proximo_fila(&fila, &pedido)) {
+
                     adicionar_pilha(&pilha, &pedido);
 
                     printf("\nPedido %d preparado com sucesso!\n", pedido.numero);
@@ -170,6 +166,7 @@ int main() {
                 scanf("%d", &numero);
 
                 consultar_por_id(&pilha, numero);
+
                 break;
             }
 
@@ -177,6 +174,7 @@ int main() {
                 Pedido pedido;
 
                 remover_topo_pilha(&pilha, &pedido);
+
                 break;
             }
 
@@ -189,15 +187,7 @@ int main() {
                 break;
 
             case 9:
-                adicionar_item_cardapio( &cardapio, &total_itens_cardapio, &proximoCodigoItem);
-                break;
-
-            case 10:
                 mostrar_cardapio(cardapio, total_itens_cardapio);
-                break;
-
-            case 11:
-                remover_item_cardapio( &cardapio, &total_itens_cardapio);
                 break;
 
             case 0:
@@ -212,8 +202,6 @@ int main() {
 
     limpar_fila(&fila);
     limpar_pilha(&pilha);
-
-    free(cardapio);
 
     return 0;
 }
